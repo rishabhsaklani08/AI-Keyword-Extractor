@@ -6,6 +6,7 @@ const Footer = () => {
             <Flex justifyContent='center' alignItems='center'>
                 <Image src={logo} marginRight={1} />
                 <Text>Powered By Open AI</Text>
+                <br />
                 <Text>Made with ☕ by Rishabh Saklani</Text>
             </Flex>
         </Box>
