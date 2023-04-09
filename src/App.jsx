@@ -1,7 +1,9 @@
+import { useState } from "react"
 import { Container, Box } from "@chakra-ui/react"
 import Header from "./components/Header"
 import Footer from "./components/Footer"
 import TextInput from "./components/TextInput"
+import KeywordsModal from "./components/KeywordsModal"
 
 
 const App = () => {
@@ -33,26 +35,39 @@ const App = () => {
       }),
     }
 
-    const response = await fetch(
-      import.meta.env.API_URL,
-      options
-    );
-    const json = await response.json();
-    console.log(json.choices[0].text.trim());
+    try {
+      const response = await fetch(
+        import.meta.env.API_URL,
+        options
+      );
+      const json = await response.json();
+      console.log(json.choices[0].text.trim());
 
-    console.log(data);
-    setKeywords(data);
-    setLoading(false);
-
+      console.log(data);
+      setKeywords(data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+    }
   }
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
   return (
     <Box bg='blue.600' color='white' height='100vh' paddingTop={130}>
       <Container maxW='3xl' centerContent>
         <Header />
         <TextInput extractKeywords={extractKeywords} />
         <Footer />
-
       </Container>
+      <KeywordsModal
+        keywords={keywords}
+        loading={loading}
+        isOpen={isOpen}
+        closeModal={closeModal}
+      />
     </Box>
   )
 }
