@@ -17,6 +17,7 @@ const TextInput = () => {
             })
             return
         }
+        extractKeywords(text);
     }
     return (
         <>
@@ -28,6 +29,7 @@ const TextInput = () => {
                 color='white'
                 value={text}
                 onChange={(e) => setText(e.target.value)}
+                placeholder="Paste your job description here..."
             />
 
             <Button
